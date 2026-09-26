@@ -154,7 +154,7 @@ VALID_APT_PACKAGES = re.compile(
 IMPORT_PIP_ALIASES = {
     "sklearn": "scikit-learn",
     "pil": "Pillow",
-    "pixelazertl": "Pixelazer-TL",
+    "pixelazertl": "pixelazer-tl",
     "markdown_it": "markdown-it-py",
 }
 
@@ -176,7 +176,7 @@ def patched_import(name: str, *args, **kwargs):
                 return native_import("pixelazertl" + name[8:], *args, **kwargs)
             case s if s.startswith("hikkatl"):
                 return native_import("pixelazertl" + name[7:], *args, **kwargs)
-            case s if s.startswith("pixelazertl"):
+            case s if s.startswith("herokutl"):
                 return native_import("pixelazertl" + name[8:], *args, **kwargs)
             case s if s.startswith("hikkalls"):
                 return native_import(name, *args, **kwargs)

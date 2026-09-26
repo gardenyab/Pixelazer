@@ -162,7 +162,7 @@ else:
                 for part in pixelazertl.__version__.split(".")
                 )
 
-            if ver_ < (1, 7, 2):
+            if ver_ < (1, 0, 2):
                 raise ImportError
         except ImportError as e:
             print(e)
