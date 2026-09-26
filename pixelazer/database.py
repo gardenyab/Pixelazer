@@ -345,7 +345,7 @@ class Database(dict):
         default: JSONSerializable | None = None,
     ) -> JSONSerializable:
         """Get database key snapshot"""
-        return copy.deepcopy(self._get_raw(owner, key, default))
+        return copy.deepcopy(self._get_raw(owner.replace("heroku.", "pixelazer."), key, default))
 
     def _get_raw(
         self,

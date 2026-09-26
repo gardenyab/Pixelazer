@@ -178,12 +178,12 @@ def patched_import(name: str, *args, **kwargs):
                 return native_import("pixelazertl" + name[7:], *args, **kwargs)
             case s if s.startswith("herokutl"):
                 return native_import("pixelazertl" + name[8:], *args, **kwargs)
+            case s if s.startswith("heroku") and not s.startswith("pixelazertl"):
+                return native_import("pixelazer" + name[6:], *args, **kwargs)
             case s if s.startswith("hikkalls"):
                 return native_import(name, *args, **kwargs)
             case s if s.startswith("hikka"):
                 return native_import("pixelazer" + name[5:], *args, **kwargs)
-            case s if s.startswith("heroku") and not s.startswith("pixelazertl"):
-                return native_import("pixelazer" + name[6:], *args, **kwargs)
 
         return native_import(name, *args, **kwargs)
     finally:
