@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_NAME="Heroku"
-MODULE_NAME="heroku"
-REPO_URL="${HEROKU_REPO_URL:-https://github.com/coddrago/Heroku.git}"
-VENV_DIR="${HEROKU_VENV_DIR:-.venv}"
-LOG_FILE="heroku-install.log"
+APP_NAME="Pixelazer"
+MODULE_NAME="pixelazer"
+REPO_URL="${PIXELAZER_REPO_URL:-https://github.com/gardenyab/Pixelazer.git}"
+VENV_DIR="${PIXELAZER_VENV_DIR:-.venv}"
+LOG_FILE="pixelazer-install.log"
 
 if [ "${SUDO_USER:-}" != "" ] && command -v sudo >/dev/null 2>&1; then
 	RUN_AS_USER=(sudo -u "$SUDO_USER")

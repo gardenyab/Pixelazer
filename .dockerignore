@@ -132,10 +132,10 @@ dmypy.json
 
 *__pycache__
 *.pyc
-heroku/api_token.py
-heroku/loaded_modules
+pixelazer/api_token.py
+pixelazer/loaded_modules
 loaded_modules
-heroku/debug_modules
+pixelazer/debug_modules
 *.session
 *.session-journal
 database-*.json
@@ -166,14 +166,14 @@ config.json
 *.mp3
 *.avi
 
-# Heroku-specific rules
-.heroku/
+# Pixelazer-specific rules
+.pixelazer/
 .apt/
 .profile.d/
 vendor/
 Pipfile.lock
 
-heroku.log.*
+pixelazer.log.*
 unknown_errors.txt
 
 *.sock

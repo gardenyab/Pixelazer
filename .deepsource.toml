@@ -1,6 +1,6 @@
 version = 1
 
-exclude_patterns = ["heroku/qr.py"]
+exclude_patterns = ["pixelazer/qr.py"]
 
 [[analyzers]]
 name = "shell"
