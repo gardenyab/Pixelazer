@@ -52,7 +52,7 @@ def restart():
 
     if "HEROKU_DO_NOT_RESTART2" in os.environ:
         print(
-            "HerokuTL version 1.0.2 or higher is required, use `pip install pixelazer-tl-new -U` for update."
+            "pixelazertl version 1.0.2 or higher is required, use `pip install pixelazer-tl -U` for update."
         )
         sys.exit(0)
 

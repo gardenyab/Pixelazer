@@ -11,8 +11,8 @@
 # 🔑 https://www.gnu.org/licenses/agpl-3.0.html
 
 import contextlib
-import herokutl
-from herokutl.tl.types import Message, User
+import pixelazertl
+from pixelazertl.tl.types import Message, User
 
 from .. import loader, main, utils, version
 from ..inline.types import InlineCall
@@ -112,7 +112,7 @@ class CoreMod(loader.Module):
                 ),
                 *version.__version__,
                 utils.get_commit_url(),
-                f"{herokutl.__version__} #{herokutl.tl.alltlobjects.LAYER}",
+                f"{pixelazertl.__version__} #{pixelazertl.tl.alltlobjects.LAYER}",
             )
             + (branch_text),
             file="https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_userbot.png",

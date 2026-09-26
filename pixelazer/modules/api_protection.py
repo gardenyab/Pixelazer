@@ -17,10 +17,10 @@ import logging
 import random
 import time
 
-from herokutl.tl import functions
-from herokutl.tl.tlobject import TLRequest
-from herokutl.tl.types import Message
-from herokutl.utils import is_list_like
+from pixelazertl.tl import functions
+from pixelazertl.tl.tlobject import TLRequest
+from pixelazertl.tl.types import Message
+from pixelazertl.utils import is_list_like
 
 from .. import loader, utils
 from ..inline.types import InlineCall

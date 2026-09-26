@@ -7,9 +7,9 @@
 import logging
 import os
 
-import herokutl
+import pixelazertl
 
-parser = herokutl.utils.sanitize_parse_mode("html")
+parser = pixelazertl.utils.sanitize_parse_mode("html")
 logger = logging.getLogger(__name__)
 
 

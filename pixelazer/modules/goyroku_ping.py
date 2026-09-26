@@ -23,8 +23,8 @@ import random
 import time
 import typing
 
-from herokutl.tl.types import Message
-from herokutl.types import InputMediaWebPage
+from pixelazertl.tl.types import Message
+from pixelazertl.types import InputMediaWebPage
 
 from .. import loader, main, utils
 from ..inline.types import InlineCall

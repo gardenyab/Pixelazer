@@ -17,10 +17,10 @@ import time
 import typing
 from collections.abc import Callable
 
-from herokutl.hints import EntityLike
-from herokutl.tl.functions.messages import GetFullChatRequest
-from herokutl.tl.types import ChatParticipantAdmin, ChatParticipantCreator, Message
-from herokutl.utils import get_display_name
+from pixelazertl.hints import EntityLike
+from pixelazertl.tl.functions.messages import GetFullChatRequest
+from pixelazertl.tl.types import ChatParticipantAdmin, ChatParticipantCreator, Message
+from pixelazertl.utils import get_display_name
 
 from . import main, utils
 from .database import Database

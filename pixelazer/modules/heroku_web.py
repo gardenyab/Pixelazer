@@ -18,7 +18,7 @@ import string
 import time
 from pathlib import Path
 
-from herokutl.errors import (
+from pixelazertl.errors import (
     FloodWaitError,
     PasswordHashInvalidError,
     PhoneCodeExpiredError,
@@ -26,10 +26,10 @@ from herokutl.errors import (
     PhoneNumberInvalidError,
     SessionPasswordNeededError,
 )
-from herokutl.sessions import MemorySession, SQLiteSession
-from herokutl.tl.custom import Message
-from herokutl.tl.types import User
-from herokutl.utils import parse_phone
+from pixelazertl.sessions import MemorySession, SQLiteSession
+from pixelazertl.tl.custom import Message
+from pixelazertl.tl.types import User
+from pixelazertl.utils import parse_phone
 
 from .. import loader, main, security, utils
 from ..loader import LOADED_MODULES_PATH

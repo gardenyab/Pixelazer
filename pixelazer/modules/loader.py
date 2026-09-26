@@ -33,11 +33,11 @@ from importlib.machinery import ModuleSpec
 from urllib.parse import urlparse
 
 import requests
-from herokutl.tl.custom import Message
-from herokutl.errors.common import ScamDetectionError
-from herokutl.errors.rpcerrorlist import MediaCaptionTooLongError
-from herokutl.tl.functions.channels import JoinChannelRequest
-from herokutl.tl.types import Channel, InputMediaWebPage
+from pixelazertl.tl.custom import Message
+from pixelazertl.errors.common import ScamDetectionError
+from pixelazertl.errors.rpcerrorlist import MediaCaptionTooLongError
+from pixelazertl.tl.functions.channels import JoinChannelRequest
+from pixelazertl.tl.types import Channel, InputMediaWebPage
 
 from .. import loader, main, utils
 from .._local_storage import RemoteStorage

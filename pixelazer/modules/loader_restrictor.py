@@ -11,15 +11,15 @@ import logging
 
 from dataclasses import dataclass
 
-from herokutl.extensions import html
-from herokutl.tl.types import (
+from pixelazertl.extensions import html
+from pixelazertl.tl.types import (
     InputMediaPoll,
     Poll,
     PollAnswer,
     TextWithEntities,
     UpdateMessagePollVote,
 )
-from herokutl.tl.custom import Message
+from pixelazertl.tl.custom import Message
 
 from .. import loader
 from ..inline.types import BotInlineCall, BotInlineMessage

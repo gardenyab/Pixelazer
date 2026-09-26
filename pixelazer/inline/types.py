@@ -1,7 +1,7 @@
 import logging
 import typing
 
-from herokutl.tl import types
+from pixelazertl.tl import types
 
 HerokuReplyMarkup = typing.Union[list[list[dict]], list[dict], dict]
 

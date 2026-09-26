@@ -22,7 +22,7 @@
  - add -n and --nonick argument to owneradd
  - add ubstop inline confirmation
  - add -f and --force argument to ubstop
- - migrate inline bot from aiogram to HerokuTL
+ - migrate inline bot from aiogram to pixelazertl
  - add support for receiving Bot API update types in the inline bot
  - add inline terminal input continuation
  - add terminate support for inline terminal sessions

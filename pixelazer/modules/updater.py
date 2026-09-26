@@ -26,11 +26,11 @@ import typing
 import aiohttp
 import git
 from git import GitCommandError, Repo
-from herokutl.tl.functions.messages import (
+from pixelazertl.tl.functions.messages import (
     GetDialogFiltersRequest,
     UpdateDialogFilterRequest,
 )
-from herokutl.tl.types import (
+from pixelazertl.tl.types import (
     DialogFilter,
     InputBotInlineMessageID,
     InputBotInlineMessageID64,

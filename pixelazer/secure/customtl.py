@@ -2,12 +2,12 @@ import asyncio
 import logging
 import time
 
-from herokutl.errors import InvalidBufferError, SecurityError
-from herokutl.extensions import BinaryReader
-from herokutl.network.connection import ConnectionTcpFull as ConnectionTcpFullOrig
-from herokutl.network.mtprotostate import MTProtoState as MTProtoStateOrig
-from herokutl.tl.core import TLMessage
-from herokutl.tl.types import BadMsgNotification, BadServerSalt
+from pixelazertl.errors import InvalidBufferError, SecurityError
+from pixelazertl.extensions import BinaryReader
+from pixelazertl.network.connection import ConnectionTcpFull as ConnectionTcpFullOrig
+from pixelazertl.network.mtprotostate import MTProtoState as MTProtoStateOrig
+from pixelazertl.tl.core import TLMessage
+from pixelazertl.tl.types import BadMsgNotification, BadServerSalt
 
 MSG_TOO_NEW_DELTA = 30
 MSG_TOO_OLD_DELTA = 300

@@ -16,10 +16,10 @@ import time
 import typing
 from collections.abc import Callable
 
-from herokutl.custom import Message
-from herokutl.hints import EntityLike
-from herokutl.tl.types import PeerUser, User
-from herokutl.utils import get_display_name
+from pixelazertl.custom import Message
+from pixelazertl.hints import EntityLike
+from pixelazertl.tl.types import PeerUser, User
+from pixelazertl.utils import get_display_name
 
 from .. import loader, main, security, utils
 from ..inline.types import InlineCall, InlineMessage

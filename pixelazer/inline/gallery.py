@@ -22,9 +22,9 @@ import typing
 from collections.abc import Callable
 from urllib.parse import urlparse
 
-from herokutl.errors.rpcerrorlist import FloodWaitError, MediaPrevInvalidError
-from herokutl.errors.rpcerrorlist import ChatSendInlineForbiddenError
-from herokutl.tl.types import Message
+from pixelazertl.errors.rpcerrorlist import FloodWaitError, MediaPrevInvalidError
+from pixelazertl.errors.rpcerrorlist import ChatSendInlineForbiddenError
+from pixelazertl.tl.types import Message
 
 from .. import main, utils
 from ..types import HerokuReplyMarkup

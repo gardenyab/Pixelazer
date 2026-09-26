@@ -150,21 +150,22 @@ elif __package__ != "pixelazer":
     )
 else:
     try:
-        import herokutl
+        import pixelazertl
     except Exception:
         pass
     else:
         try:
-            import herokutl  # noqa: F811
+            import pixelazertl  # noqa: F811
 
             ver_ = tuple(
                 int(match.group()) if (match := re.match(r"\d+", part)) else 0
-                for part in herokutl.__version__.split(".")
+                for part in pixelazertl.__version__.split(".")
                 )
 
             if ver_ < (1, 7, 2):
                 raise ImportError
-        except ImportError:
+        except ImportError as e:
+            print(e)
             print("\U0001f504 Installing dependencies...")
             deps()
             restart()

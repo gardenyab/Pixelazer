@@ -19,8 +19,8 @@ import os
 import time
 import typing
 
-from herokutl import TelegramClient, events
-from herokutl.errors.rpcerrorlist import (
+from pixelazertl import TelegramClient, events
+from pixelazertl.errors.rpcerrorlist import (
     AccessTokenExpiredError,
     AccessTokenInvalidError,
     AuthKeyUnregisteredError,
@@ -29,14 +29,14 @@ from herokutl.errors.rpcerrorlist import (
     UserIsBlockedError,
     YouBlockedUserError,
 )
-from herokutl.sessions import SQLiteSession
-from herokutl.tl.functions.contacts import UnblockRequest
-from herokutl.tl.functions.messages import (
+from pixelazertl.sessions import SQLiteSession
+from pixelazertl.tl.functions.contacts import UnblockRequest
+from pixelazertl.tl.functions.messages import (
     GetDialogFiltersRequest,
     SetTypingRequest,
     UpdateDialogFilterRequest,
 )
-from herokutl.tl.types import (
+from pixelazertl.tl.types import (
     DialogFilter,
     InputPeerUser,
     Message,
@@ -53,7 +53,7 @@ from herokutl.tl.types import (
     UpdateMessagePoll,
     UpdateMessagePollVote,
 )
-from herokutl.utils import get_display_name
+from pixelazertl.utils import get_display_name
 
 from .. import main, utils
 from ..database import Database
