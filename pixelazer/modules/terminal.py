@@ -167,7 +167,7 @@ class SudoMessageEditor(MessageEditor):
 
         if any(lastlines[0] == i for i in self.PASS_REQ) and self.state == 0:
             logger.debug("Success to find sudo log!")
-            text = self.strings["auth_needed"].format(self.message.client.heroku_me.id)
+            text = self.strings["auth_needed"].format(self.message.client.pixelazer_me.id)
 
             try:
                 await utils.answer(self.message, text)

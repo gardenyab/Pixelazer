@@ -291,7 +291,7 @@ class TelegramLogsHandler(logging.Handler):
             self.targets[0].format(record)
             for record in (self.buffer + self.handledbuffer)
             if record.levelno >= lvl
-            and (not record.heroku_caller or client_id == record.heroku_caller)
+            and (not record.pixelazer_caller or client_id == record.pixelazer_caller)
         ]
 
     async def _show_full_trace(
@@ -302,7 +302,7 @@ class TelegramLogsHandler(logging.Handler):
     ):
         chunks = (
             item.message
-            + "\n\n<b>🪐 Full traceback:</b>\n"
+            + "\n\n<b>🍓 Full traceback:</b>\n"
             + f'<pre><code class="language-python">{item.full_stack}</code></pre>'
         )
 
@@ -385,7 +385,7 @@ class TelegramLogsHandler(logging.Handler):
                             reply_markup=self._mods[client_id].inline.generate_markup(
                                 [
                                     {
-                                        "text": "🪐 Full traceback",
+                                        "text": "🍓 Full traceback",
                                         "callback": self._show_full_trace,
                                         "args": (
                                             self._mods[client_id].inline.bot,
@@ -477,11 +477,11 @@ class TelegramLogsHandler(logging.Handler):
         try:
             caller = next(
                 (
-                    frame_info.frame.f_locals["_heroku_client_id_logging_tag"]
+                    frame_info.frame.f_locals["_pixelazer_client_id_logging_tag"]
                     for frame_info in inspect.stack()
                     if isinstance(
                         getattr(getattr(frame_info, "frame", None), "f_locals", {}).get(
-                            "_heroku_client_id_logging_tag"
+                            "_pixelazer_client_id_logging_tag"
                         ),
                         int,
                     )
@@ -494,7 +494,7 @@ class TelegramLogsHandler(logging.Handler):
         except Exception:
             caller = None
 
-        record.heroku_caller = caller
+        record.pixelazer_caller = caller
 
         if record.levelno >= self.tg_level:
             if record.exc_info:
@@ -554,7 +554,7 @@ class TelegramLogsHandler(logging.Handler):
 
 
 async def check_branch(me_id: int, allowed_ids: list, self):
-    if os.environ.get("HEROKU_NO_GIT") == "1":
+    if os.environ.get("PIXELAZER_NO_GIT") == "1":
         return
     repo_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 

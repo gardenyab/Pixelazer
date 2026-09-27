@@ -107,15 +107,15 @@ class CoreMod(loader.Module):
             self.strings["pixelazer"].format(
                 (
                     utils.get_platform_emoji()
-                    if self._client.heroku_me.premium
-                    else "🪐 <b>Pixelazer userbot</b>"
+                    if self._client.pixelazer_me.premium
+                    else "🍓 <b>Pixelazer userbot</b>"
                 ),
                 *version.__version__,
                 utils.get_commit_url(),
                 f"{pixelazertl.__version__} #{pixelazertl.tl.alltlobjects.LAYER}",
             )
             + (branch_text),
-            file="https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_userbot.png",
+            file="https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_userbot.png",
             reply_to=getattr(message, "reply_to_msg_id", None),
         )
 
@@ -530,7 +530,7 @@ class CoreMod(loader.Module):
         disabled_commands = self._db.get(main.__name__, "disabled_commands", {})
         current = [x for x in disabled_commands.get(module_key, [])]
 
-        if cmd.lower() not in [c.lower() for c in mod_inst.heroku_commands.keys()]:
+        if cmd.lower() not in [c.lower() for c in mod_inst.pixelazer_commands.keys()]:
             await utils.answer(message, self.strings["cmd404"])
 
         if any(c.lower() == cmd.lower() for c in current):
@@ -649,13 +649,13 @@ class CoreMod(loader.Module):
                 self.strings["choose_installation"],
                 message,
                 reply_markup=self._markup(),
-                photo="https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_installation.png",
+                photo="https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_installation.png",
             )
         ):
 
             await self.client.send_file(
                 message.peer_id,
-                "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_installation.png",
+                "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_installation.png",
                 caption=self.strings["vds_install"],
                 reply_to=getattr(message, "reply_to_msg_id", None),
             )

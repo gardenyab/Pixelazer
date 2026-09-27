@@ -39,7 +39,6 @@ def getBlockedStr() -> str:
             {"command": "ChannelAdminRights", "perms": "edit channel and chats users perms"},
             {"command": "EditBannedRequest", "perms": "kick and ban users"},
             {"command": "rmdir", "perms": "presumably remove dirs"},
-            {"command": "telethon", "perms": "telethon funcs"},
             {"command": "get_response", "perms": "get telegram messages"},
             {"command": "CustomTelegramClient", "perms": "attempt to create another client"},
         ],

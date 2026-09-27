@@ -61,12 +61,11 @@ class _InlineFormDraft:
 
 
 @loader.tds
-class HerokuConfigMod(loader.Module):
+class ConfigMod(loader.Module):
     """Interactive configurator for Pixelazer Userbot"""
 
     strings = {
-        "name": "HerokuConfig",
-        "displayName": "Config",
+        "name": "Config",
         "choose_core": "<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Choose a category</b>",
         "configure": "<tg-emoji emoji-id=5341715473882955310>⚙️</tg-emoji> <b>Choose a module to configure</b>",
         "configure_lib": "📦 <b>Choose a library to configure</b>",

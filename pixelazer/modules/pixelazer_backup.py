@@ -32,16 +32,16 @@ logger = logging.getLogger(__name__)
 
 
 @loader.tds
-class HerokuBackupMod(loader.Module):
+class BackupMod(loader.Module):
     """Handles database and modules backups"""
 
-    strings = {"name": "HerokuBackup"}
+    strings = {"name": "Backup"}
 
     async def client_ready(self):
         if not self.get("period"):
             await self.inline.bot.send_photo(
                 self.tg_id,
-                photo="https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_backup.png",
+                photo="https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_backup.png",
                 caption=self.strings["period"],
                 reply_markup=self.inline.generate_markup(
                     utils.chunks(
@@ -264,6 +264,7 @@ class HerokuBackupMod(loader.Module):
 
     def _convert(self, backup):
         fixed = re.sub(r"(hikka\.)(\S+\":)", lambda m: "pixelazer." + m.group(2), backup)
+        fixed = re.sub(r"(heroku\.)(\S+\":)", lambda m: "pixelazer." + m.group(2), fixed)
         txt = io.BytesIO(fixed.encode())
         txt.name = f"db-converted-{datetime.datetime.now():%d-%m-%Y-%H-%M}.json"
         return txt

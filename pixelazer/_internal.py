@@ -50,7 +50,7 @@ def restart():
     if "--sandbox" in " ".join(sys.argv):
         exit(0)
 
-    if "HEROKU_DO_NOT_RESTART2" in os.environ:
+    if "PIXELAZER_DO_NOT_RESTART2" in os.environ:
         print(
             "pixelazertl version 1.0.2 or higher is required, use `pip install pixelazer-tl -U` for update."
         )
@@ -60,10 +60,10 @@ def restart():
 
     print("🔄 Restarting...")
 
-    if "HEROKU_DO_NOT_RESTART" not in os.environ:
-        os.environ["HEROKU_DO_NOT_RESTART"] = "1"
+    if "PIXELAZER_DO_NOT_RESTART" not in os.environ:
+        os.environ["PIXELAZER_DO_NOT_RESTART"] = "1"
     else:
-        os.environ["HEROKU_DO_NOT_RESTART2"] = "1"
+        os.environ["PIXELAZER_DO_NOT_RESTART2"] = "1"
 
     if "DOCKER" in os.environ or sys.platform == "win32":
         atexit.register(get_startup_callback())

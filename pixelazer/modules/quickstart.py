@@ -27,7 +27,7 @@ class Quickstart(loader.Module):
     async def client_ready(self):
         self.text = lambda: self.strings["base"].format(
             utils.get_platform_emoji()
-            if self.client.heroku_me.premium is True
+            if self.client.pixelazer_me.premium is True
             else "Pixelazer"
         )
 

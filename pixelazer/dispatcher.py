@@ -115,19 +115,19 @@ class CommandDispatcher:
         self.security = security.SecurityManager(client, db)
 
         self.check_security = self.security.check
-        self._me = self._client.heroku_me.id
+        self._me = self._client.pixelazer_me.id
         self._cached_usernames = set()
 
-        if self._client.heroku_me.username:
-            self._cached_usernames.add(self._client.heroku_me.username.lower())
+        if self._client.pixelazer_me.username:
+            self._cached_usernames.add(self._client.pixelazer_me.username.lower())
 
-        if self._client.heroku_me.usernames:
+        if self._client.pixelazer_me.usernames:
             self._cached_usernames.update(
                 u.username.lower()
-                for u in getattr(self._client.heroku_me, "usernames", [])
+                for u in getattr(self._client.pixelazer_me, "usernames", [])
             )
 
-        self._cached_usernames.add(str(self._client.heroku_me.id))
+        self._cached_usernames.add(str(self._client.pixelazer_me.id))
 
         self.raw_handlers = []
 
@@ -257,7 +257,7 @@ class CommandDispatcher:
         message.edit = my_edit
         message.reply = my_reply
         message.respond = my_respond
-        message.heroku_grepped = True
+        message.pixelazer_grepped = True
 
         return message
 
@@ -696,7 +696,7 @@ class CommandDispatcher:
     ):
         # Will be used to determine, which client caused logging messages
         # parsed via inspect.stack()
-        _heroku_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
+        _pixelazer_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
         try:
             await func(message)
         except Exception as e:

@@ -94,7 +94,7 @@ class Gallery(InlineUnit):
         :return: If gallery is sent, returns :obj:`InlineMessage`, otherwise returns `False`
         """
         with contextlib.suppress(AttributeError):
-            _heroku_client_id_logging_tag = copy.copy(self._client.tg_id)  # noqa: F841
+            _pixelazer_client_id_logging_tag = copy.copy(self._client.tg_id)  # noqa: F841
 
         custom_buttons = self._validate_markup(custom_buttons)
 
@@ -258,8 +258,8 @@ class Gallery(InlineUnit):
                 )(
                     (
                         utils.get_platform_emoji()
-                        if self._client.heroku_me.premium
-                        else "🪐"
+                        if self._client.pixelazer_me.premium
+                        else "🍓"
                     )
                     + self.translator.getkey("inline.opening_gallery"),
                     **({"reply_to": utils.get_topic(message)} if message.out else {}),

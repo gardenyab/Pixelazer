@@ -250,7 +250,7 @@ class InlineManager(
         :rtype: None
         """
         self._me = self._client.tg_id
-        self._name = get_display_name(self._client.heroku_me)
+        self._name = get_display_name(self._client.pixelazer_me)
 
         if not ignore_token_checks:
             is_token_asserted = await self._assert_token()
@@ -281,7 +281,7 @@ class InlineManager(
             self._bot_client._tg_id = telegram_id
             self._bot_client.tg_id = telegram_id
             self._bot_client.hikka_me = bot_me
-            self._bot_client.heroku_me = bot_me
+            self._bot_client.pixelazer_me = bot_me
             self.bot_username = bot_me.username
             self.bot_id = bot_me.id
         except (

@@ -155,10 +155,10 @@ class Database(dict):
             content_channel, _ = await utils.asset_channel(
                 client=self._client,
                 title="pixelazer-userbot",
-                description="🪐 Content related to Pixelazer will be here",
+                description="🍓 Content related to Pixelazer will be here",
                 silent=True,
                 invite_bot=True,
-                avatar="https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_ava.png",
+                avatar="https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_chats.png",
                 forum=True,
                 hide_general=True,
                 _folder="pixelazer",

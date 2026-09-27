@@ -68,7 +68,7 @@ class List(InlineUnit):
         :return: If list is sent, returns :obj:`InlineMessage`, otherwise returns `False`
         """
         with contextlib.suppress(AttributeError):
-            _heroku_client_id_logging_tag = copy.copy(self._client.tg_id)  # noqa: F841
+            _pixelazer_client_id_logging_tag = copy.copy(self._client.tg_id)  # noqa: F841
 
         custom_buttons = self._validate_markup(custom_buttons)
 
@@ -192,8 +192,8 @@ class List(InlineUnit):
                 )(
                     (
                         utils.get_platform_emoji()
-                        if self._client.heroku_me.premium
-                        else "🪐"
+                        if self._client.pixelazer_me.premium
+                        else "🍓"
                     )
                     + self.translator.getkey("inline.opening_list"),
                     **({"reply_to": utils.get_topic(message)} if message.out else {}),
@@ -329,7 +329,7 @@ class List(InlineUnit):
                             await inline_query.builder.article(
                                 title="Pixelazer",
                                 text=(
-                                    "🪐"
+                                    "🍓"
                                     if unit.get("premium_emoji_pre_edit")
                                     else self.sanitise_text(unit["strings"][0])
                                 ),

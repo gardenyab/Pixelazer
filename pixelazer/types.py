@@ -192,7 +192,7 @@ class Module:
         return get_commands(self)
 
     @property
-    def heroku_commands(self) -> dict[str, Command]:
+    def pixelazer_commands(self) -> dict[str, Command]:
         """List of commands that module supports"""
         return get_commands(self)
 
@@ -202,7 +202,7 @@ class Module:
         return get_inline_handlers(self)
 
     @property
-    def heroku_inline_handlers(self) -> dict[str, Command]:
+    def pixelazer_inline_handlers(self) -> dict[str, Command]:
         """List of inline handlers that module supports"""
         return get_inline_handlers(self)
 
@@ -212,7 +212,7 @@ class Module:
         return get_callback_handlers(self)
 
     @property
-    def heroku_callback_handlers(self) -> dict[str, Command]:
+    def pixelazer_callback_handlers(self) -> dict[str, Command]:
         """List of callback handlers that module supports"""
         return get_callback_handlers(self)
 
@@ -222,7 +222,7 @@ class Module:
         return get_watchers(self)
 
     @property
-    def heroku_watchers(self) -> dict[str, Command]:
+    def pixelazer_watchers(self) -> dict[str, Command]:
         """List of watchers that module supports"""
         return get_watchers(self)
 
@@ -230,32 +230,32 @@ class Module:
     def commands(self, _):
         pass
 
-    @heroku_commands.setter
-    def heroku_commands(self, _):
+    @pixelazer_commands.setter
+    def pixelazer_commands(self, _):
         pass
 
     @inline_handlers.setter
     def inline_handlers(self, _):
         pass
 
-    @heroku_inline_handlers.setter
-    def heroku_inline_handlers(self, _):
+    @pixelazer_inline_handlers.setter
+    def pixelazer_inline_handlers(self, _):
         pass
 
     @callback_handlers.setter
     def callback_handlers(self, _):
         pass
 
-    @heroku_callback_handlers.setter
-    def heroku_callback_handlers(self, _):
+    @pixelazer_callback_handlers.setter
+    def pixelazer_callback_handlers(self, _):
         pass
 
     @watchers.setter
     def watchers(self, _):
         pass
 
-    @heroku_watchers.setter
-    def heroku_watchers(self, _):
+    @pixelazer_watchers.setter
+    def pixelazer_watchers(self, _):
         pass
 
     async def animate(
@@ -280,7 +280,7 @@ class Module:
         from . import utils
 
         with contextlib.suppress(AttributeError):
-            _heroku_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
+            _pixelazer_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
 
         if interval < 0.1:
             logger.warning(
@@ -344,7 +344,7 @@ class Module:
                 "✖️ <b>Declined joining <a"
                 f' href="https://t.me/{channel.username}">{utils.escape_html(channel.title)}</a></b>'
             ),
-            photo="https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_dclj.png",
+            photo="https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_declined_join.png",
         )
 
     async def request_join(
@@ -408,7 +408,7 @@ class Module:
 
         await self.inline.bot.send_photo(
             self.tg_id,
-            "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_joinr.png",
+            "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_join_request.png",
             caption=(
                 self._client.loader.lookup("translations")
                 .strings("requested_join")
@@ -435,7 +435,7 @@ class Module:
             ),
         )
 
-        self.heroku_wait_channel_approve = (
+        self.pixelazer_wait_channel_approve = (
             self.__class__.__name__,
             channel,
             reason,
@@ -444,7 +444,7 @@ class Module:
         await event.wait()
 
         with contextlib.suppress(AttributeError):
-            delattr(self, "heroku_wait_channel_approve")
+            delattr(self, "pixelazer_wait_channel_approve")
 
         if assure_joined and not event.status:
             raise LoadError(
@@ -490,11 +490,11 @@ class Module:
         code.raise_for_status()
         code = code.text
 
-        if re.search(r"# ?scope: ?heroku_min", code):
+        if re.search(r"# ?scope: ?pixelazer_min", code):
             ver = tuple(
                 map(
                     int,
-                    re.search(r"# ?scope: ?heroku_min ((\d+\.){2}\d+)", code)[1].split(
+                    re.search(r"# ?scope: ?pixelazer_min ((\d+\.){2}\d+)", code)[1].split(
                         "."
                     ),
                 )

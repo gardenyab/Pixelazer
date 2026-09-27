@@ -53,7 +53,7 @@ class Utils(InlineUnit):
 
     def _needs_premium_emoji_pre_edit(self, text: typing.Any) -> bool:
         return self._has_premium_emoji(text) and bool(
-            getattr(getattr(self._client, "heroku_me", None), "premium", False)
+            getattr(getattr(self._client, "pixelazer_me", None), "premium", False)
         )
 
     def _get_button_style(self, button: dict) -> str | None:

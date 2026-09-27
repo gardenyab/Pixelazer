@@ -387,7 +387,7 @@ async def answer(
         rich_message = response
 
     if rich_message is not None:
-        rich_filter = getattr(message, "_heroku_grep_rich", None)
+        rich_filter = getattr(message, "_pixelazer_grep_rich", None)
         if callable(rich_filter):
             rich_message = rich_filter(rich_message)
 
@@ -402,7 +402,7 @@ async def answer(
             )
 
         if reply_markup or not getattr(
-            getattr(message.client, "heroku_me", None), "premium", False
+            getattr(message.client, "pixelazer_me", None), "premium", False
         ):
             inline = message.client.loader.inline
             form_kwargs = {
@@ -490,7 +490,7 @@ async def answer(
     if isinstance(response, str) and not kwargs.pop("asfile", False):
         text, entities = parse_mode.parse(response) if parse_mode else (response, [])
 
-        if len(text) >= 4096 and not hasattr(message, "heroku_grepped"):
+        if len(text) >= 4096 and not hasattr(message, "pixelazer_grepped"):
             try:
                 if not message.client.loader.inline.init_complete:
                     raise

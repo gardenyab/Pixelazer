@@ -494,7 +494,7 @@ class Pixelazer:
         self.omit_log = False
         self.arguments = parse_arguments()
         if self.arguments.no_git:
-            os.environ["HEROKU_NO_GIT"] = "1"
+            os.environ["PIXELAZER_NO_GIT"] = "1"
         if self.arguments.data_root:
             BASE_DIR = self.arguments.data_root
             BASE_PATH = Path(BASE_DIR)
@@ -664,6 +664,7 @@ class Pixelazer:
             client.tg_id = telegram_id
             client.hikka_me = me
             client.heroku_me = me
+            client.pixelazer_me = me
 
         session = SQLiteSession(
             os.path.join(
@@ -687,11 +688,11 @@ class Pixelazer:
             restart()
 
         client.session = session
-        client.heroku_db = database.Database(client)
-        await client.heroku_db.init()
+        client.pixelazer_db = database.Database(client)
+        await client.pixelazer_db.init()
 
         try:
-            db = client.heroku_db
+            db = client.pixelazer_db
             existing = db.get("pixelazer.inline", "custom_bot", False)
         except Exception:
             existing = False
@@ -743,7 +744,7 @@ class Pixelazer:
         client._tg_id = telegram_id
         client.tg_id = telegram_id
         client.hikka_me = me
-        client.heroku_me = me
+        client.pixelazer_me = me
 
         db = database.Database(client)
         await db.init()
@@ -988,7 +989,7 @@ class Pixelazer:
             client._tg_id = me.id
             client.tg_id = me.id
             client.hikka_me = me
-            client.heroku_me = me
+            client.pixelazer_me = me
 
             #await version.check_branch(me.id, a_i, self)
 
@@ -998,7 +999,7 @@ class Pixelazer:
     async def _badge(self, client: CustomTelegramClient):
         """Call the badge in shell"""
         try:
-            if os.environ.get("HEROKU_NO_GIT") == "1":
+            if os.environ.get("PIXELAZER_NO_GIT") == "1":
                 build = "unknown"
                 upd = "Git disabled"
             else:
@@ -1008,7 +1009,7 @@ class Pixelazer:
                     build = repo.head.commit.hexsha
                     diff = repo.git.log([f"HEAD..origin/{version.branch}", "--oneline"])
                 upd = "Update required" if diff else "Up-to-date"
-            pref = client.heroku_db.get("pixelazer.main", "command_prefix", None)
+            pref = client.pixelazer_db.get("pixelazer.main", "command_prefix", None)
 
             logo = (
                 "                          _           \n"
@@ -1026,7 +1027,7 @@ class Pixelazer:
             if not self.omit_log:
                 print(logo)
                 logging.debug(
-                    "\n🪐 Pixelazer %s #%s (%s) started",
+                    "\n🍓 Pixelazer %s #%s (%s) started",
                     ".".join(list(map(str, list(__version__)))),
                     build[:7],
                     upd,
@@ -1043,9 +1044,9 @@ class Pixelazer:
                     .get_logs_topic_id_by_client(client.tg_id)
                 )
 
-                await client.heroku_inline.bot.send_photo(
+                await client.pixelazer_inline.bot.send_photo(
                     log_chat_id,
-                    "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_userbot.png",
+                    "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_userbot.png",
                     caption=(
                         "{} <b>{} started!</b>\n\n<tg-emoji emoji-id=5231065262228250587>⚙</tg-emoji> <b>GitHub commit SHA: <a"
                         ' href="https://github.com/gardenyab/Pixelazer/commit/{}">{}</a></b>\n<tg-emoji emoji-id=5873225338984599714>🔎</tg-emoji>'
@@ -1053,8 +1054,8 @@ class Pixelazer:
                     ).format(
                         (
                             utils.get_platform_emoji()
-                            if client.heroku_me.premium is True
-                            else "🪐 Pixelazer"
+                            if client.pixelazer_me.premium is True
+                            else "🍓 Pixelazer"
                         ),
                         ".".join(list(map(str, list(__version__)))),
                         build,
@@ -1069,7 +1070,7 @@ class Pixelazer:
             logging.debug(
                 "· Started for %s · Prefix: «%s» ·",
                 client.tg_id,
-                client.heroku_db.get(__name__, "command_prefix", False) or ".",
+                client.pixelazer_db.get(__name__, "command_prefix", False) or ".",
             )
         except Exception:
             logging.exception("Badge error")
@@ -1116,7 +1117,7 @@ class Pixelazer:
         await client.start()
 
         db = database.Database(client)
-        client.heroku_db = db
+        client.pixelazer_db = db
         await db.init()
         logging.debug("Got DB")
         logging.debug("Loading logging config...")

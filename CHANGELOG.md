@@ -1,5 +1,5 @@
 # Pixelazer Changelog
-## 🪐 Pixelazer 2.1.0
+## 🍓 Pixelazer 2.1.0
 
  - fix security check in help
  - fix blockquote in config and info
@@ -104,7 +104,7 @@
  - add successful module load debug log
  - feat(config): add expandable blockquote for section parameters display
  - fix(loader): include module name in debug log message
- - fix(heroku_config): simplify formatting of option lines
+ - fix(pixelazer_config): simplify formatting of option lines
  - update config formatting
  - refactor: streamline category parameter display
  - add scope for restrict ml (no_ml)
@@ -130,7 +130,7 @@
  - store bot's ID and user information in client instance
  - enhance reaction handling and improve message text update logic
 
-## 🪐 Pixelazer 2.0.0
+## 🍓 Pixelazer 2.0.0
 
 - rework utils
 - add prefix to start message
@@ -247,7 +247,7 @@
 - fix restore button invoke
 - improve logging logic
 
-## 🪐 Pixelazer 1.7.2
+## 🍓 Pixelazer 1.7.2
 
 - added autoupdate
 - updated pixelazer-tl to 1.7.2
@@ -284,7 +284,7 @@
 - added quote for list commands in help
 - fix banner in .presets command
 
-## 🪐 Pixelazer 1.7.1
+## 🍓 Pixelazer 1.7.1
 
 - fixed bug with web 
 - fixed bug with executor
@@ -301,7 +301,7 @@
 - fixed error with "method not mounted"
 - added bot polling sleep log to ignore filter
 
-## 🪐 Pixelazer 1.7.0
+## 🍓 Pixelazer 1.7.0
 
 - added banner to ping
 - added config for emoji in config (.cfg herokuconfig)
@@ -325,7 +325,7 @@
 - updated inline bot stack
 - fix some bugs with buttons in inline
 
-## 🪐 Pixelazer 1.6.8
+## 🍓 Pixelazer 1.6.8
 
 - Finally renamed to Pixelazer and new Emoji
 - many changes and improvements

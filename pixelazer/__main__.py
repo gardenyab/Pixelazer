@@ -24,7 +24,7 @@ from pathlib import Path
 from ._internal import restart
 
 if "--no-git" in sys.argv:
-    os.environ["HEROKU_NO_GIT"] = "1"
+    os.environ["PIXELAZER_NO_GIT"] = "1"
 
 
 def get_data_root():
@@ -182,10 +182,10 @@ else:
         deps()
         restart()
 
-    if "HEROKU_DO_NOT_RESTART" in os.environ:
-        del os.environ["HEROKU_DO_NOT_RESTART"]
-    if "HEROKU_DO_NOT_RESTART2" in os.environ:
-        del os.environ["HEROKU_DO_NOT_RESTART2"]
+    if "PIXELAZER_DO_NOT_RESTART" in os.environ:
+        del os.environ["PIXELAZER_DO_NOT_RESTART"]
+    if "PIXELAZER_DO_NOT_RESTART2" in os.environ:
+        del os.environ["PIXELAZER_DO_NOT_RESTART2"]
 
     prev_hash = None
     if os.path.exists(".requirements_hash"):

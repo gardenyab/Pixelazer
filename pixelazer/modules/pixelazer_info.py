@@ -28,11 +28,11 @@ logger = logging.getLogger(__name__)
 
 
 @loader.tds
-class HerokuInfoMod(loader.Module):
+class InfoMod(loader.Module):
     """Show userbot info"""
 
     strings = {
-        "name": "HerokuInfo",
+        "name": "Info",
     }
 
     def __init__(self):
@@ -61,13 +61,13 @@ class HerokuInfoMod(loader.Module):
             ),
             loader.ConfigValue(
                 "banner_url",
-                "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_info.png",
+                "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_info.png",
                 lambda: self.strings["_cfg_banner"],
                 validator=loader.validators.RandomLink(),
             ),
             loader.ConfigValue(
                 "ping_emoji",
-                "🪐",
+                "🍓",
                 lambda: self.strings["ping_emoji"],
                 validator=loader.validators.String(),
             ),
@@ -126,8 +126,8 @@ class HerokuInfoMod(loader.Module):
 
         me = (
             '<b><a href="tg://user?id={}">{}</a></b>'.format(
-                self._client.heroku_me.id,
-                utils.escape_html(get_display_name(self._client.heroku_me)),
+                self._client.pixelazer_me.id,
+                utils.escape_html(get_display_name(self._client.pixelazer_me)),
             )
             .replace("{", "")
             .replace("}", "")
@@ -200,7 +200,7 @@ class HerokuInfoMod(loader.Module):
             else self.strings["info_message"].format(
                 (
                     utils.get_platform_emoji()
-                    if self._client.heroku_me.premium and self.config["show_heroku"]
+                    if self._client.pixelazer_me.premium and self.config["show_heroku"]
                     else ""
                 ),
                 me=me,

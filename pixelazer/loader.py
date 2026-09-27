@@ -217,7 +217,7 @@ class InfiniteLoop:
 
     def stop(self, *args, **kwargs):
         with contextlib.suppress(AttributeError):
-            _heroku_client_id_logging_tag = copy.copy(  # noqa: F841
+            _pixelazer_client_id_logging_tag = copy.copy(  # noqa: F841
                 self.module_instance.allmodules.client.tg_id
             )
 
@@ -234,7 +234,7 @@ class InfiniteLoop:
 
     def start(self, *args, **kwargs):
         with contextlib.suppress(AttributeError):
-            _heroku_client_id_logging_tag = copy.copy(  # noqa: F841
+            _pixelazer_client_id_logging_tag = copy.copy(  # noqa: F841
                 self.module_instance.allmodules.client.tg_id
             )
 
@@ -592,6 +592,7 @@ class Modules:
         asyncio.ensure_future(self._junk_collector())
         self.inline = InlineManager(self.client, self._db, self)
         self.client.heroku_inline = self.inline
+        self.client.pixelazer_inline = self.inline
 
     async def _junk_collector(self):
         """
@@ -605,10 +606,10 @@ class Modules:
             callback_handlers = {}
             watchers = []
             for module in self.modules:
-                commands.update(module.heroku_commands)
-                inline_handlers.update(module.heroku_inline_handlers)
-                callback_handlers.update(module.heroku_callback_handlers)
-                watchers.extend(module.heroku_watchers.values())
+                commands.update(module.pixelazer_commands)
+                inline_handlers.update(module.pixelazer_inline_handlers)
+                callback_handlers.update(module.pixelazer_callback_handlers)
+                watchers.extend(module.pixelazer_watchers.values())
 
             self.commands = commands
             self.inline_handlers = inline_handlers
@@ -667,7 +668,7 @@ class Modules:
         origin: str = "<core>",
     ) -> list[Module]:
         with contextlib.suppress(AttributeError):
-            _heroku_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
+            _pixelazer_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
 
         loaded = []
 
@@ -706,7 +707,7 @@ class Modules:
     ) -> Module:
         """Register single module from importlib spec"""
         with contextlib.suppress(AttributeError):
-            _heroku_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
+            _pixelazer_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
 
         module = importlib.util.module_from_spec(spec)
         sys.modules[module_name] = module
@@ -871,14 +872,14 @@ class Modules:
     def register_commands(self, instance: Module):
         """Register commands from instance"""
         with contextlib.suppress(AttributeError):
-            _heroku_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
+            _pixelazer_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
 
         if instance.__origin__.startswith("<core"):
             self._core_commands += list(
-                map(lambda x: x.lower(), list(instance.heroku_commands))
+                map(lambda x: x.lower(), list(instance.pixelazer_commands))
             )
 
-        for _command, cmd in instance.heroku_commands.items():
+        for _command, cmd in instance.pixelazer_commands.items():
             # Restrict overwriting core modules' commands
             if (
                 not self._remove_core_protection
@@ -894,13 +895,13 @@ class Modules:
 
         for alias, cmd in self.aliases.copy().items():
             _cmd = cmd.split(maxsplit=1)
-            if _cmd[0] in instance.heroku_commands:
+            if _cmd[0] in instance.pixelazer_commands:
                 self.add_alias(alias, *_cmd)
 
         self.register_inline_stuff(instance)
 
     def register_inline_stuff(self, instance: Module):
-        for name, func in instance.heroku_inline_handlers.copy().items():
+        for name, func in instance.pixelazer_inline_handlers.copy().items():
             if name.lower() in self.inline_handlers:
                 if (
                     hasattr(func, "__self__")
@@ -924,7 +925,7 @@ class Modules:
 
             self.inline_handlers.update({name.lower(): func})
 
-        for name, func in instance.heroku_callback_handlers.copy().items():
+        for name, func in instance.pixelazer_callback_handlers.copy().items():
             if name.lower() in self.callback_handlers and (
                 hasattr(func, "__self__")
                 and hasattr(self.callback_handlers[name], "__self__")
@@ -940,7 +941,7 @@ class Modules:
             self.callback_handlers.update({name.lower(): func})
 
     def unregister_inline_stuff(self, instance: Module, purpose: str):
-        for name, func in instance.heroku_inline_handlers.copy().items():
+        for name, func in instance.pixelazer_inline_handlers.copy().items():
             if name.lower() in self.inline_handlers and (
                 hasattr(func, "__self__")
                 and hasattr(self.inline_handlers[name], "__self__")
@@ -955,7 +956,7 @@ class Modules:
                     purpose,
                 )
 
-        for name, func in instance.heroku_callback_handlers.copy().items():
+        for name, func in instance.pixelazer_callback_handlers.copy().items():
             if name.lower() in self.callback_handlers and (
                 hasattr(func, "__self__")
                 and hasattr(self.callback_handlers[name], "__self__")
@@ -973,14 +974,14 @@ class Modules:
     def register_watchers(self, instance: Module):
         """Register watcher from instance"""
         with contextlib.suppress(AttributeError):
-            _heroku_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
+            _pixelazer_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
 
         for _watcher in self.watchers:
             if _watcher.__self__.__class__.__name__ == instance.__class__.__name__:
                 logger.debug("Removing watcher %s for update", _watcher)
                 self.watchers.remove(_watcher)
 
-        for _watcher in instance.heroku_watchers.values():
+        for _watcher in instance.pixelazer_watchers.values():
             self.watchers += [_watcher]
 
     def lookup(
@@ -1034,7 +1035,7 @@ class Modules:
     async def complete_registration(self, instance: Module):
         """Complete registration of instance"""
         with contextlib.suppress(AttributeError):
-            _heroku_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
+            _pixelazer_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
 
         instance.allmodules = self
         instance.internal_init()
@@ -1150,7 +1151,7 @@ class Modules:
     def send_config_one(self, mod: Module, skip_hook: bool = False):
         """Send config to single instance"""
         with contextlib.suppress(AttributeError):
-            _heroku_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
+            _pixelazer_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
 
         if hasattr(mod, "config"):
             modcfg = self._db.get(
@@ -1215,7 +1216,7 @@ class Modules:
         from_dlmod: bool = False,
     ):
         with contextlib.suppress(AttributeError):
-            _heroku_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
+            _pixelazer_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
 
         if from_dlmod:
             try:
@@ -1309,7 +1310,7 @@ class Modules:
         worked = []
 
         with contextlib.suppress(AttributeError):
-            _heroku_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
+            _pixelazer_client_id_logging_tag = copy.copy(self.client.tg_id)  # noqa: F841
 
         for module in self.modules:
             if classname.lower() in (

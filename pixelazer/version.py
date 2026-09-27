@@ -16,7 +16,7 @@ __version__ = (2, 2, 6)
 
 import os
 
-NO_GIT = os.environ.get("HEROKU_NO_GIT") == "1"
+NO_GIT = os.environ.get("PIXELAZER_NO_GIT") == "1"
 if not NO_GIT:
     import git
 else:

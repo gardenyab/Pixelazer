@@ -42,10 +42,10 @@ logger = logging.getLogger(__name__)
 
 
 @loader.tds
-class HerokuWebMod(loader.Module):
+class WebMod(loader.Module):
     """Inline account management"""
 
-    strings = {"name": "HerokuAccounts"}
+    strings = {"name": "Accounts"}
 
     @loader.command()
     async def addacc(self, message: Message):

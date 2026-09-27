@@ -43,7 +43,7 @@ from .._internal import restart
 from ..inline.types import BotInlineCall, InlineCall
 
 logger = logging.getLogger(__name__)
-NO_GIT = os.environ.get("HEROKU_NO_GIT") == "1"
+NO_GIT = os.environ.get("PIXELAZER_NO_GIT") == "1"
 
 os.environ["GIT_TERMINAL_PROMPT"] = "0"
 os.environ["GIT_ASKPASS"] = "echo"
@@ -282,7 +282,7 @@ class UpdaterMod(loader.Module):
             if manual_update:
                 m = await self.inline.bot.send_photo(
                     self.tg_id,
-                    "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_updated.png",
+                    "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_updated.png",
                     caption=self.strings["update_required"].format(
                         current[:6],
                         '<a href="https://github.com/gardenyab/Pixelazer/compare/{}...{}">{}</a>'.format(
@@ -305,7 +305,7 @@ class UpdaterMod(loader.Module):
             else:
                 m = await self.inline.bot.send_photo(
                     self.tg_id,
-                    "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_updated.png",
+                    "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_updated.png",
                     caption=self.strings["autoupdate_notifier"].format(
                         self._pending[:6],
                         changelog,
@@ -523,7 +523,7 @@ class UpdaterMod(loader.Module):
             msg_obj,
             self.strings["restarting_caption"].format(
                 utils.get_platform_emoji()
-                if self._client.heroku_me.premium
+                if self._client.pixelazer_me.premium
                 else "Pixelazer"
             ),
         )
@@ -772,7 +772,7 @@ class UpdaterMod(loader.Module):
         if not self.config["autoupdate"] and not self.get("autoupdate_answered", False):
             await self.inline.bot.send_photo(
                 self.tg_id,
-                photo="https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_backup.png",
+                photo="https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_updates.png",
                 caption=self.strings["autoupdate"],
                 reply_markup=self.inline.generate_markup(
                     [
@@ -812,7 +812,7 @@ class UpdaterMod(loader.Module):
 
         folders = await self._client(GetDialogFiltersRequest())
         filters = getattr(folders, "filters", folders)
-        heroku_f = False
+        pixelazer_f = False
 
         if filters:
 
@@ -823,9 +823,9 @@ class UpdaterMod(loader.Module):
                     raw_title = getattr(title, "text", title)
 
                     if str(raw_title).strip() == "Pixelazer":
-                        heroku_f = True
+                        pixelazer_f = True
 
-        if heroku_f is True:
+        if pixelazer_f is True:
             return
         else:
             try:
@@ -1011,7 +1011,7 @@ class UpdaterMod(loader.Module):
             message=message,
             text=self.strings["stop_ub_confirm"].format(
                 utils.get_platform_emoji()
-                if self.client.heroku_me.premium
+                if self.client.pixelazer_me.premium
                 else "Pixelazer"
             ),
             reply_markup=[

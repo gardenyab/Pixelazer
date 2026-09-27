@@ -82,7 +82,7 @@ class LoaderMod(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "MODULES_REPO",
-                "https://raw.githubusercontent.com/coddrago/modules/main",
+                "https://raw.githubusercontent.com/gardenyab/modules/main",
                 lambda: self.strings["repo_config_doc"],
                 validator=loader.validators.Link(),
             ),
@@ -116,13 +116,19 @@ class LoaderMod(loader.Module):
                 lambda: self.strings["show_banner_doc"],
                 validator=loader.validators.Boolean(),
             ),
+            loader.ConfigValue(
+                "use_converter",
+                True,
+                lambda: self.strings["use_converter_doc"],
+                validator=loader.validators.Boolean(),
+            ),
         )
 
     async def _async_init(self):
         modules = list(
             filter(
                 lambda x: not x.startswith(
-                    "https://raw.githubusercontent.com/coddrago/modules/main"
+                    "https://raw.githubusercontent.com/gardenyab/modules/main"
                 ),
                 utils.array_sum(
                     map(
@@ -513,6 +519,7 @@ class LoaderMod(loader.Module):
 
         try:
             doc = doc.decode()
+            if self.config["use_converter"]: doc = re.sub(r"\bheroku\b", "pixelazer", doc)
         except UnicodeDecodeError:
             await utils.answer(message, self.strings["bad_unicode"])
             return
@@ -565,7 +572,7 @@ class LoaderMod(loader.Module):
                 "💫 <b>Joined <a"
                 f' href="https://t.me/{channel.username}">{utils.escape_html(channel.title)}</a></b>'
             ),
-            photo="https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_aprjn.png",
+            photo="https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_joined.png",
         )
 
     async def install_requirements(self, requirements: list):
@@ -722,8 +729,8 @@ class LoaderMod(loader.Module):
                 await utils.answer(message, self.strings["inline_init_failed"])
             return False
 
-        if re.search(r"# ?scope: ?heroku_min", doc):
-            ver = re.search(r"# ?scope: ?heroku_min ((?:\d+\.){2}\d+)", doc).group(1)
+        if re.search(r"# ?scope: ?pixelazer_min", doc):
+            ver = re.search(r"# ?scope: ?pixelazer_min ((?:\d+\.){2}\d+)", doc).group(1)
             ver_ = tuple(map(int, ver.split(".")))
             if main.__version__ < ver_:
                 logger.error(
@@ -1014,13 +1021,13 @@ class LoaderMod(loader.Module):
                 async def inner_proxy():
                     nonlocal instance, message
                     while True:
-                        if hasattr(instance, "heroku_wait_channel_approve"):
+                        if hasattr(instance, "pixelazer_wait_channel_approve"):
                             if message:
                                 (
                                     module,
                                     channel,
                                     reason,
-                                ) = instance.heroku_wait_channel_approve
+                                ) = instance.pixelazer_wait_channel_approve
                                 message = await utils.answer(
                                     message,
                                     self.strings["wait_channel_approve"].format(
@@ -1127,7 +1134,7 @@ class LoaderMod(loader.Module):
 
             return False
 
-        instance.heroku_meta_pic = next(
+        instance.pixelazer_meta_pic = next(
             (
                 line.replace(" ", "").split("#metapic:", maxsplit=1)[1]
                 for line in doc.splitlines()
@@ -1168,7 +1175,7 @@ class LoaderMod(loader.Module):
             developer_entity = await (
                 self._client.force_get_entity
                 if (
-                    developer in self._client.heroku_entity_cache
+                    developer in self._client.pixelazer_entity_cache
                     and getattr(
                         await self._client.get_entity(developer),
                         "left",

@@ -188,7 +188,7 @@ class APIRatelimiterMod(loader.Module):
 
         self._client._call = new_call
         self._client._old_call_rewritten = old_call
-        self._client._call._heroku_overwritten = True
+        self._client._call._pixelazer_overwritten = True
         logger.debug("Successfully installed ratelimiter")
 
     async def on_unload(self):

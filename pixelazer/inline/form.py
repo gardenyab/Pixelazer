@@ -46,7 +46,7 @@ VERIFICATION_EMOJIES = list(
         "🦀🐡🐠🐟🐅🐊🦭🦈🐋🐳🐬🐆🦓🦍🦧🦣🐘🦛🐃🦬🦘🦒🐫🐪🦏"
         "🐂🐄🐎🐖🐏🐑🦙🐈🐕‍🦺🦮🐩🐕🦌🐐🐈‍⬛🪶🐓🦃🦤🦚🦜🦡🦨🦝🐇"
         "🕊🦩🦢🦫🦦🦥🐁🐀🐿🦔🌳🌲🌵🐲🐉🐾🎋🍂🍁🍄🐚🌾🪨💐🌷"
-        "🥀🌺🌸🌻🌞🌜🌘🌗🌎🪐💫⭐️✨⚡️☄️💥☀️🌪🔥🌈🌤⛅️❄️⛄️🌊"
+        "🥀🌺🌸🌻🌞🌜🌘🌗🌎🍓💫⭐️✨⚡️☄️💥☀️🌪🔥🌈🌤⛅️❄️⛄️🌊"
         "☂️🍏🍎🍐🍊🍋🍌🍉🥭🍑🍒🍈🫐🍓🍇🍍🥥🥝🍅🥑🥦🧔‍♂️"
     )
 )
@@ -108,7 +108,7 @@ class Form(InlineUnit):
         :return: If form is sent, returns :obj:`InlineMessage`, otherwise returns `False`
         """
         with contextlib.suppress(AttributeError):
-            _heroku_client_id_logging_tag = copy.copy(self._client.tg_id)  # noqa: F841
+            _pixelazer_client_id_logging_tag = copy.copy(self._client.tg_id)  # noqa: F841
 
         if reply_markup is None:
             reply_markup = []
@@ -272,8 +272,8 @@ class Form(InlineUnit):
                 )(
                     (
                         utils.get_platform_emoji()
-                        if self._client.heroku_me.premium
-                        else "🪐"
+                        if self._client.pixelazer_me.premium
+                        else "🍓"
                     )
                     + self.translator.getkey("inline.opening_form"),
                     **({"reply_to": utils.get_topic(message)} if message.out else {}),
@@ -461,7 +461,7 @@ class Form(InlineUnit):
             return
 
         form = self._units[inline_query.query]
-        form_text = "🪐" if form.get("premium_emoji_pre_edit") else form.get("text")
+        form_text = "🍓" if form.get("premium_emoji_pre_edit") else form.get("text")
         try:
             match True:
                 case _ if "photo" in form:

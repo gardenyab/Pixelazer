@@ -50,7 +50,7 @@ class Help(loader.Module):
             ),
             loader.ConfigValue(
                 "desc_icon",
-                "<tg-emoji emoji-id=5188377234380954537>🪐</tg-emoji>",
+                "<tg-emoji emoji-id=5188377234380954537>🍓</tg-emoji>",
                 lambda: self.strings["desc_icon_doc"],
             ),
             loader.ConfigValue(
@@ -179,7 +179,7 @@ class Help(loader.Module):
         )
 
         reply = "{} <b>{}</b>:".format(
-            "<tg-emoji emoji-id=5134452506935427991>🪐</tg-emoji>",
+            "<tg-emoji emoji-id=5134452506935427991>🍓</tg-emoji>",
             _name,
         )
         inline_cmd = ""
@@ -298,7 +298,7 @@ class Help(loader.Module):
             banner = InputMediaWebPage(str(self.config["banner_url"]))
 
         if (
-            self.config["banner_url"] and self.client.heroku_me.premium is False
+            self.config["banner_url"] and self.client.pixelazer_me.premium is False
         ):  # bcs non-premium users can add in caption only 1024 symbols
             banner = InputMediaWebPage(str(self.config["banner_url"]))
 

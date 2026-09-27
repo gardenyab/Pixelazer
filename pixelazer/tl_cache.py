@@ -75,22 +75,22 @@ class CustomTelegramClient(TelegramClient):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self._heroku_entity_cache: dict[
+        self._pixelazer_entity_cache: dict[
             str | int,
             CacheRecordEntity,
         ] = {}
 
-        self._heroku_perms_cache: dict[
+        self._pixelazer_perms_cache: dict[
             str | int,
             CacheRecordPerms,
         ] = {}
 
-        self._heroku_fullchannel_cache: dict[
+        self._pixelazer_fullchannel_cache: dict[
             str | int,
             CacheRecordFullChannel,
         ] = {}
 
-        self._heroku_fulluser_cache: dict[
+        self._pixelazer_fulluser_cache: dict[
             str | int,
             CacheRecordFullUser,
         ] = {}
@@ -106,11 +106,11 @@ class CustomTelegramClient(TelegramClient):
         self.dispatcher: "CommandDispatcher"
         self.tg_id: int
         self._tg_id: int
-        self.heroku_me: "User"
+        self.pixelazer_me: "User"
         self.hikka_me: "User"
-        self.heroku_db: "Database"
+        self.pixelazer_db: "Database"
         self.loader: "Modules"
-        self.heroku_inline: "InlineManager"
+        self.pixelazer_inline: "InlineManager"
 
     async def connect(self, unix_socket_path: str | None = None):
         if self.session is None:
@@ -215,20 +215,20 @@ class CustomTelegramClient(TelegramClient):
         self._raw_updates_processor = value
 
     @property
-    def heroku_entity_cache(self) -> dict[int, CacheRecordEntity]:
-        return self._heroku_entity_cache
+    def pixelazer_entity_cache(self) -> dict[int, CacheRecordEntity]:
+        return self._pixelazer_entity_cache
 
     @property
-    def heroku_perms_cache(self) -> dict[int, CacheRecordPerms]:
-        return self._heroku_perms_cache
+    def pixelazer_perms_cache(self) -> dict[int, CacheRecordPerms]:
+        return self._pixelazer_perms_cache
 
     @property
-    def heroku_fullchannel_cache(self) -> dict[int, CacheRecordFullChannel]:
-        return self._heroku_fullchannel_cache
+    def pixelazer_fullchannel_cache(self) -> dict[int, CacheRecordFullChannel]:
+        return self._pixelazer_fullchannel_cache
 
     @property
-    def heroku_fulluser_cache(self) -> dict[int, CacheRecordFullUser]:
-        return self._heroku_fulluser_cache
+    def pixelazer_fulluser_cache(self) -> dict[int, CacheRecordFullUser]:
+        return self._pixelazer_fulluser_cache
 
     @property
     def forbidden_constructors(self) -> list[str]:
@@ -256,7 +256,7 @@ class CustomTelegramClient(TelegramClient):
 
         # Will be used to determine, which client caused logging messages
         # parsed via inspect.stack()
-        _heroku_client_id_logging_tag = copy.copy(self.tg_id)  # noqa: F841
+        _pixelazer_client_id_logging_tag = copy.copy(self.tg_id)  # noqa: F841
 
         if not hashable(entity):
             try:
@@ -280,37 +280,37 @@ class CustomTelegramClient(TelegramClient):
         if (
             not force
             and hashable_entity
-            and hashable_entity in self._heroku_entity_cache
+            and hashable_entity in self._pixelazer_entity_cache
             and (
                 not exp
-                or self._heroku_entity_cache[hashable_entity].ts + exp > time.time()
+                or self._pixelazer_entity_cache[hashable_entity].ts + exp > time.time()
             )
         ):
             logger.debug(
                 "Using cached entity %s (%s)",
                 entity,
-                type(self._heroku_entity_cache[hashable_entity].entity).__name__,
+                type(self._pixelazer_entity_cache[hashable_entity].entity).__name__,
             )
-            return copy.deepcopy(self._heroku_entity_cache[hashable_entity].entity)
+            return copy.deepcopy(self._pixelazer_entity_cache[hashable_entity].entity)
 
         resolved_entity = await super().get_entity(entity)
 
         if resolved_entity:
             cache_record = CacheRecordEntity(hashable_entity, resolved_entity, exp)
-            self._heroku_entity_cache[hashable_entity] = cache_record
+            self._pixelazer_entity_cache[hashable_entity] = cache_record
             logger.debug("Saved hashable_entity %s to cache", hashable_entity)
 
             if getattr(resolved_entity, "id", None):
                 logger.debug("Saved resolved_entity id %s to cache", resolved_entity.id)
-                self._heroku_entity_cache[resolved_entity.id] = cache_record
+                self._pixelazer_entity_cache[resolved_entity.id] = cache_record
 
             if getattr(resolved_entity, "username", None):
                 logger.debug(
                     "Saved resolved_entity username @%s to cache",
                     resolved_entity.username,
                 )
-                self._heroku_entity_cache[f"@{resolved_entity.username}"] = cache_record
-                self._heroku_entity_cache[resolved_entity.username] = cache_record
+                self._pixelazer_entity_cache[f"@{resolved_entity.username}"] = cache_record
+                self._pixelazer_entity_cache[resolved_entity.username] = cache_record
 
         return copy.deepcopy(resolved_entity)
 
@@ -333,7 +333,7 @@ class CustomTelegramClient(TelegramClient):
 
         # Will be used to determine, which client caused logging messages
         # parsed via inspect.stack()
-        _heroku_client_id_logging_tag = copy.copy(self.tg_id)  # noqa: F841
+        _pixelazer_client_id_logging_tag = copy.copy(self.tg_id)  # noqa: F841
 
         entity = await self.get_entity(entity)
         user = await self.get_entity(user) if user else None
@@ -378,16 +378,16 @@ class CustomTelegramClient(TelegramClient):
             not force
             and hashable_entity
             and hashable_user
-            and hashable_user in self._heroku_perms_cache.get(hashable_entity, {})
+            and hashable_user in self._pixelazer_perms_cache.get(hashable_entity, {})
             and (
                 not exp
-                or self._heroku_perms_cache[hashable_entity][hashable_user].ts + exp
+                or self._pixelazer_perms_cache[hashable_entity][hashable_user].ts + exp
                 > time.time()
             )
         ):
             logger.debug("Using cached perms %s (%s)", hashable_entity, hashable_user)
             return copy.deepcopy(
-                self._heroku_perms_cache[hashable_entity][hashable_user].perms
+                self._pixelazer_perms_cache[hashable_entity][hashable_user].perms
             )
 
         resolved_perms = await self.get_permissions(entity, user)
@@ -399,7 +399,7 @@ class CustomTelegramClient(TelegramClient):
                 resolved_perms,
                 exp,
             )
-            self._heroku_perms_cache.setdefault(hashable_entity, {})[
+            self._pixelazer_perms_cache.setdefault(hashable_entity, {})[
                 hashable_user
             ] = cache_record
             logger.debug("Saved hashable_entity %s perms to cache", hashable_entity)
@@ -407,13 +407,13 @@ class CustomTelegramClient(TelegramClient):
             def save_user(key: str | int):
                 nonlocal self, cache_record, user, hashable_user
                 if getattr(user, "id", None):
-                    self._heroku_perms_cache.setdefault(key, {})[user.id] = cache_record
+                    self._pixelazer_perms_cache.setdefault(key, {})[user.id] = cache_record
 
                 if getattr(user, "username", None):
-                    self._heroku_perms_cache.setdefault(key, {})[
+                    self._pixelazer_perms_cache.setdefault(key, {})[
                         f"@{user.username}"
                     ] = cache_record
-                    self._heroku_perms_cache.setdefault(key, {})[
+                    self._pixelazer_perms_cache.setdefault(key, {})[
                         user.username
                     ] = cache_record
 
@@ -469,14 +469,14 @@ class CustomTelegramClient(TelegramClient):
 
         if (
             not force
-            and self._heroku_fullchannel_cache.get(hashable_entity)
-            and not self._heroku_fullchannel_cache[hashable_entity].expired
-            and self._heroku_fullchannel_cache[hashable_entity].ts + exp > time.time()
+            and self._pixelazer_fullchannel_cache.get(hashable_entity)
+            and not self._pixelazer_fullchannel_cache[hashable_entity].expired
+            and self._pixelazer_fullchannel_cache[hashable_entity].ts + exp > time.time()
         ):
-            return self._heroku_fullchannel_cache[hashable_entity].full_channel
+            return self._pixelazer_fullchannel_cache[hashable_entity].full_channel
 
         result = await self(GetFullChannelRequest(channel=entity))
-        self._heroku_fullchannel_cache[hashable_entity] = CacheRecordFullChannel(
+        self._pixelazer_fullchannel_cache[hashable_entity] = CacheRecordFullChannel(
             hashable_entity,
             result,
             exp,
@@ -521,14 +521,14 @@ class CustomTelegramClient(TelegramClient):
 
         if (
             not force
-            and self._heroku_fulluser_cache.get(hashable_entity)
-            and not self._heroku_fulluser_cache[hashable_entity].expired
-            and self._heroku_fulluser_cache[hashable_entity].ts + exp > time.time()
+            and self._pixelazer_fulluser_cache.get(hashable_entity)
+            and not self._pixelazer_fulluser_cache[hashable_entity].expired
+            and self._pixelazer_fulluser_cache[hashable_entity].ts + exp > time.time()
         ):
-            return self._heroku_fulluser_cache[hashable_entity].full_user
+            return self._pixelazer_fulluser_cache[hashable_entity].full_user
 
         result = await self(GetFullUserRequest(entity))
-        self._heroku_fulluser_cache[hashable_entity] = CacheRecordFullUser(
+        self._pixelazer_fulluser_cache[hashable_entity] = CacheRecordFullUser(
             hashable_entity,
             result,
             exp,

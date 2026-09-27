@@ -365,7 +365,7 @@ async def asset_forum_topic(
             CreateForumTopicRequest(
                 peer=entity,
                 title=title,
-                icon_emoji_id=(icon_emoji_id if client.heroku_me.premium else None),
+                icon_emoji_id=(icon_emoji_id if client.pixelazer_me.premium else None),
             )
         )
 

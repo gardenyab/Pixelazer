@@ -443,7 +443,7 @@ class Evaluator(loader.Module):
             )
 
     def censor(self, ret: str) -> str:
-        ret = ret.replace(str(self._client.heroku_me.phone), "&lt;phone&gt;")
+        ret = ret.replace(str(self._client.pixelazer_me.phone), "&lt;phone&gt;")
 
         if redis := os.environ.get("REDIS_URL") or main.get_config_key("redis_uri"):
             ret = ret.replace(redis, f'redis://{"*" * 26}')

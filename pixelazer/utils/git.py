@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 
 def _is_no_git() -> bool:
-    return os.environ.get("HEROKU_NO_GIT") == "1"
+    return os.environ.get("PIXELAZER_NO_GIT") == "1"
 
 
 # GeekTG Compatibility

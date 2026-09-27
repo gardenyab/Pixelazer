@@ -407,7 +407,7 @@ class Events(InlineUnit):
                 doc = "🦥 No docs"
 
             try:
-                thumb = getattr(fun, "thumb_url", None) or fun.__self__.heroku_meta_pic
+                thumb = getattr(fun, "thumb_url", None) or fun.__self__.pixelazer_meta_pic
             except Exception:
                 thumb = None
 

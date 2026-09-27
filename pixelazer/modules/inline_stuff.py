@@ -44,7 +44,7 @@ class InlineStuff(loader.Module):
 
         await message.delete()
 
-        m = await message.respond("🪐", reply_to=utils.get_topic(message))
+        m = await message.respond("🍓", reply_to=utils.get_topic(message))
 
         await self.inline.gallery(
             message=m,
@@ -115,14 +115,14 @@ class InlineStuff(loader.Module):
         match message.text:
             case "/start":
                 await message.answer_photo(
-                    "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_userbot.png",
+                    "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_userbot.png",
                     caption=self.strings["this_is_heroku"].format(
                         (
-                            "<tg-emoji emoji-id=5463379725441341739>🪐</tg-emoji>"
-                            if self._client.heroku_me.premium is True
-                            else "🪐"
+                            "<tg-emoji emoji-id=5463379725441341739>🍓</tg-emoji>"
+                            if self._client.pixelazer_me.premium is True
+                            else "🍓"
                         ),
-                        utils.get_platform_emoji() if self._client.heroku_me.premium is True else "Pixelazer",
+                        utils.get_platform_emoji() if self._client.pixelazer_me.premium is True else "Pixelazer",
                     ),
                     reply_markup=self.inline.generate_markup(
                         markup_obj=[
@@ -148,7 +148,7 @@ class InlineStuff(loader.Module):
                     pass
                 else:
                     await message.answer_photo(
-                        "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_userbot.png",
+                        "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_userbot.png",
                         caption=self.strings["profile_cmd"].format(
                             prefix=self.get_prefix(),
                             ram_usage=utils.get_ram_usage(),

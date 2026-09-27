@@ -69,7 +69,7 @@ class TokenObtainment(InlineUnit):
                 username = f"@{genran}_{uid}_bot"
 
             for msg in [
-                "🪐 Pixelazer userbot"[:64],
+                "🍓 Pixelazer userbot"[:64],
                 username,
                 "/setuserpic",
                 username,
@@ -91,11 +91,11 @@ class TokenObtainment(InlineUnit):
 
                 if "DOCKER" in os.environ:
                     m = await conv.send_file(
-                        "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/goyroku_ava.png"
+                        "https://raw.githubusercontent.com/gardenyab/Pixelazer/refs/heads/master/assets/pixelazer_profile_photo.png"
                     )
                 else:
                     m = await conv.send_file(
-                        main.BASE_PATH / "assets" / "goyroku_ava.png"
+                        main.BASE_PATH / "assets" / "pixelazer_profile_photo.png"
                     )
                 r = await conv.get_response()
 

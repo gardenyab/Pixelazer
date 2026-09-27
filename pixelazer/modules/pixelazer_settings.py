@@ -34,10 +34,10 @@ ALL_INVOKES = [
 
 
 @loader.tds
-class HerokuSettingsMod(loader.Module):
+class SettingsMod(loader.Module):
     """Advanced settings for Pixelazer Userbot"""
 
-    strings = {"name": "HerokuSettings"}
+    strings = {"name": "Settings"}
 
     def get_watchers(self) -> tuple:
         return [
