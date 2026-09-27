@@ -51,7 +51,7 @@ class CoreMod(loader.Module):
                     "vds",
                     "wsl",
                     "userland",
-                    "hikkahost",
+                    "bothosting",
                 ]
             ],
             2,
@@ -88,7 +88,7 @@ class CoreMod(loader.Module):
         ua_doc="Інформація про Pixelazer",
         de_doc="Informationen über Pixelazer",
     )
-    async def goyrokucmd(self, message: Message):
+    async def pixelazercmd(self, message: Message):
 
         branch_text = ""
         if version.branch == "master":

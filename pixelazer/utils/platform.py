@@ -116,7 +116,7 @@ def get_platform_emoji() -> str:
 
     BASE = "".join(
         (
-            "<tg-emoji emoji-id=5163712267992171162>😀</tg-emoji> Pixelazer"
+            "<tg-emoji emoji-id=5163712267992171162>😀</tg-emoji> <b>Pixelazer</b>"
         )
     )
 
