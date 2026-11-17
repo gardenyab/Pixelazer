@@ -41,7 +41,7 @@ class BackupMod(loader.Module):
         self.config = loader.ModuleConfig(
             loader.ConfigValue(
                 "topic_id",
-                None,
+                0,
                 "Введите айди топика для бекапов",
                 validator=loader.validators.Integer(),
             )
@@ -178,7 +178,7 @@ class BackupMod(loader.Module):
                 z.writestr("mods.zip", mods.getvalue())
 
             archive.name = f"backup-{datetime.datetime.now():%d-%m-%Y-%H-%M}.backup"
-            if self.config["topic_id"] == None: backup_topic_id = await utils.get_topic_id(self._db, "Backups")
+            if self.config["topic_id"] == 0: backup_topic_id = await utils.get_topic_id(self._db, "Backups")
             else: backup_topic_id = self.config["topic_id"]
                 
             if not backup_topic_id:
