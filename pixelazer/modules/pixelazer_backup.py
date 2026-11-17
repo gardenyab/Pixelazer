@@ -37,6 +37,16 @@ class BackupMod(loader.Module):
 
     strings = {"name": "Backup"}
 
+    def __init__(self):
+        self.config = loader.ModuleConfig(
+            loader.ConfigValue(
+                "topic_id",
+                None,
+                "Введите айди топика для бекапов",
+                validator=loader.validators.Integer(),
+            )
+        )
+    
     async def client_ready(self):
         if not self.get("period"):
             await self.inline.bot.send_photo(
@@ -168,8 +178,9 @@ class BackupMod(loader.Module):
                 z.writestr("mods.zip", mods.getvalue())
 
             archive.name = f"backup-{datetime.datetime.now():%d-%m-%Y-%H-%M}.backup"
-
-            backup_topic_id = await utils.get_topic_id(self._db, "Backups")
+            if self.config["topic_id"] == None: backup_topic_id = await utils.get_topic_id(self._db, "Backups")
+            else: backup_topic_id = self.config["topic_id"]
+                
             if not backup_topic_id:
                 logger.error("Backups topic not found in database")
                 return
